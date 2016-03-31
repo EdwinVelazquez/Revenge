@@ -14,8 +14,7 @@ import java.util.Vector;
  * it uses Jinput api (so yes you need to have the api)
  * Website tutorial get the ipa into eclipse (or other) - http://goo.gl/kOWfCw
  * NOTE
- * this assumes the remote exist in the machine
- * but it does not throw an error
+ * this assumes the remote exist in the machine but it does not throw an error
  ***************************************
  *To use this you need to make an instance of this class
  *in the instance it takes an int representing the player
@@ -32,8 +31,8 @@ import java.util.Vector;
  *THINGS ADDED
  **assumes remotes does exist!
  *Analog Values for L and R joystick (each have their x and y)
- *added ability to have more than one remote (NEEDS TO BE TESTED)
- *(ONLY TESTED WITH ONE REMOTE)
+ *added ability to have more than one remote 
+ * cleaned the code a bit here (deleted some comments that where code from testing)
  ***************************************
  * @author josuerojas
  */
@@ -123,14 +122,7 @@ public class PS3Controller {
 				}
 				
 				return controlA[pos.elementAt(player - 1)];
-			
-				//if -1 then the remote doesn't exit
-				//should throw an error (i'm assuming the remote does exist so i don't want to handle it)
-				//if(remotePos == -1){
-					//return null;
-				//}
-				//System.out.println(remotePos);
-				//return controlA[remotePos]; 
+		
 	}
 	
 	/**
@@ -143,25 +135,6 @@ public class PS3Controller {
 	public  boolean isPressed(int key){
 		//always have to check poll (its similar to checking event in keylistener)
 		ps3R.poll();
-		/*
-		//if analog
-		if(allComp[key].isAnalog()){
-			System.out.println("Error key input");
-			return false;
-		}
-		//the retrun boolean
-		//boolean isPress = false;
-		
-		if(allComp[key].getPollData()==1.0f) {
-			return true;
-			} 
-		else {
-			return false;
-			}
-			
-        //return isPress;
-        */
-		//shorter code
 		//checks if if its a button (not analog) and checks if button is pressed
 		return (!allComp[key].isAnalog()) && (allComp[key].getPollData()==1.0f);
 	}
