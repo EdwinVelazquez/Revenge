@@ -4,7 +4,7 @@ This is a readme for the folder Game
 This is just a test for a Ps3 remote in java
 Before anything if you plan on using these classes you must add the jinput api
 So far I have
--added ability to have more than one remmote (have not tested the second remote)
+-added ability to have more than one remmote 
 -easy to use by making an instance with an int parameter indicating the player # (constructor)
   then calling its functions to get 
           1) isPressed(int button) returns boolean if a button is pressed 
