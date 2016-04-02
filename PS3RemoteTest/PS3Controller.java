@@ -14,7 +14,8 @@ import java.util.Vector;
  * it uses Jinput api (so yes you need to have the api)
  * Website tutorial get the ipa into eclipse (or other) - http://goo.gl/kOWfCw
  * NOTE
- * this assumes the remote exist in the machine but it does not throw an error
+ * this assumes the remote exist in the machine
+ * but it does not throw an error
  ***************************************
  *To use this you need to make an instance of this class
  *in the instance it takes an int representing the player
@@ -31,8 +32,7 @@ import java.util.Vector;
  *THINGS ADDED
  **assumes remotes does exist!
  *Analog Values for L and R joystick (each have their x and y)
- *added ability to have more than one remote 
- * cleaned the code a bit here (deleted some comments that where code from testing)
+ *added ability to have more than one remote (NEEDS TO BE TESTED)
  ***************************************
  * @author josuerojas
  */
@@ -80,8 +80,9 @@ public class PS3Controller {
 	 */
 	public PS3Controller(int player){
 		ps3R = getControl(player);
-		System.out.println(ps3R.getName());
-		allComp = ps3R.getComponents();
+		if(!(ps3R == null)){
+			allComp = ps3R.getComponents();
+		}
 	}
 	
 	
@@ -117,7 +118,7 @@ public class PS3Controller {
 				//or numControlls is no zero
 				//should be handled differently
 				if(player > numControlls || player < 0 || numControlls == 0){
-					System.out.println("NULL?");
+					//System.out.println("NULL?");
 					return null;
 				}
 				
