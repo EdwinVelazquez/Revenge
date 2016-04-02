@@ -23,6 +23,7 @@ public class Game extends Applet implements KeyListener, Runnable, MouseListener
 	Image offScreen;
 	Graphics off_g;
 	PS3Controller player1 = new PS3Controller(1);
+	PS3Controller player2 = new PS3Controller(2);
 	
 	
     public void init(){
@@ -63,7 +64,27 @@ public class Game extends Applet implements KeyListener, Runnable, MouseListener
     	g.drawString("Left Y" + player1.joystick(PS3Controller.L_Y), 200, 220);
     	g.drawString("Right X" + player1.joystick(PS3Controller.R_X), 200, 240);
     	g.drawString("Right Y" + player1.joystick(PS3Controller.R_Y), 200, 260);
+    	if(player2.isPressed(PS3Controller.SELECT)){
+    		g.drawString("Select", 100, 100);
+    	}
+    	if(player2.isPressed(PS3Controller.START)){
+    		g.drawString("START", 100, 120);
+    	}
+    	if(player2.isPressed(PS3Controller.CIRCLE)){
+    		g.drawString("CIRCLE", 100, 140);
+    	}
+    	if(player2.isPressed(PS3Controller.SQUARE)){
+    		g.drawString("SQAURE", 100, 160);
+    	}
+    	if(player2.isPressed(PS3Controller.TRIANGLE)){
+    		g.drawString("TRIANGLE", 100, 180);
+    	}
+    	g.drawString("Left X" + player2.joystick(PS3Controller.L_X), 100, 200);
+    	g.drawString("Left Y" + player2.joystick(PS3Controller.L_Y), 100, 220);
+    	g.drawString("Right X" + player2.joystick(PS3Controller.R_X), 100, 240);
+    	g.drawString("Right Y" + player2.joystick(PS3Controller.R_Y), 100, 260);
     }
+    
     
 	@Override
 	public void mouseClicked(MouseEvent e) {
