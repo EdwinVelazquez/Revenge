@@ -70,7 +70,7 @@ public class PS3Controller {
 	private Component[] allComp;
 	//static Rumbler[] rum = ps3R.getRumblers(); //not getting any rumblers 
 	
-	//all positions for all remotes
+	//all positions for all (PS3)remotes
 	static Vector<Integer> pos = pos();
 
 	
@@ -80,6 +80,7 @@ public class PS3Controller {
 	 */
 	public PS3Controller(int player){
 		ps3R = getControl(player);
+		//put a check null just in case no controller exist and prevent errors
 		if(!(ps3R == null)){
 			allComp = ps3R.getComponents();
 		}
@@ -106,7 +107,7 @@ public class PS3Controller {
 	}
 	
 	/**
-	 * a private class to get the first occurrence of the ps3 remote
+	 * a private class to get the controller depending on the player
 	 * @return the first occurrence of the ps3 remote
 	 */
 	private static Controller getControl(int player){
@@ -118,12 +119,9 @@ public class PS3Controller {
 				//or numControlls is no zero
 				//should be handled differently
 				if(player > numControlls || player < 0 || numControlls == 0){
-					//System.out.println("NULL?");
 					return null;
 				}
-				
 				return controlA[pos.elementAt(player - 1)];
-		
 	}
 	
 	/**
@@ -163,24 +161,4 @@ public class PS3Controller {
 		return data;
 	}
 	
-	/**
-	 * main method was or should be used for testing purpose 
-	 * @param args
-	 */
-	/*
-	public static void main(String[] args){
-		//PS3Remote r = new PS3Remote();
-		System.out.println("Checking Select button");
-		System.out.println(allComp[2].getName());
-		while(true){
-			
-				
-			
-		}
-		
-	}
-	*/
-	
-	
-
 }
