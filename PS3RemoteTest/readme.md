@@ -17,5 +17,5 @@ Which can be found here - [http://goo.gl/kOWfCw](http://goo.gl/kOWfCw)
 - add exceptions (maybe)
   - when remote does't exist
   - when player # doesn't exit (i think this should be handled by the main program)
-  - thinking of renaming joystick function or at least return x and y values together
-  - (going to clean the code later to remove the unwanted comments)
+- thinking of renaming joystick function or at least return x and y values together
+- (going to clean the code later to remove the unwanted comments)
