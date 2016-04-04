@@ -1,4 +1,4 @@
-# This is a readme for the folder Game
+# This is a readme for the PS3RemoteTest Game
 *First I am going to change the name later to match what it actually does.
 
 This is just a test for a PS3 remote in java
