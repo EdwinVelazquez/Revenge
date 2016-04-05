@@ -13,7 +13,7 @@ Which can be found here - [http://goo.gl/kOWfCw](http://goo.gl/kOWfCw)
 - avoid having more duplicate instance (avoid having 2 player with the same remote)
 - add exceptions (maybe)
   - when remote does't exist
-  - when player # doesn't exit (i think this should be handled by the main program)
+  - when player # doesn't exist (i think this should be handled by the main program)
 - ability to configure controls
 - maybe add mouse as a controller or include that in the keyboard
 - make another class to have all the controllers and manage all exceptions (maybe)
