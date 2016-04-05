@@ -1,6 +1,6 @@
 # This is a readme for the ControlTest folder
 
-This is just a test for managing controls of the inputs (keyboard, controls(ps3), etc)
+This is just a test for the bare bones of managing controls of the inputs (keyboard, controls(ps3), etc)
 If you want to use the PS3Controller class you need to setup jinput
 Which can be found here - [http://goo.gl/kOWfCw](http://goo.gl/kOWfCw)
 
