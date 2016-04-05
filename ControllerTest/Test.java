@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Toolkit;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 
 import javax.swing.JCheckBoxMenuItem;
@@ -36,14 +37,13 @@ public class Test extends JFrame implements Runnable {
 	//width and height
 	int w = 500, h = 500;
 	
-	static //controllers
-	KeyboardControl k; //addKeyListener() in init()
+	//controllers
+	Control k; //addKeyListener() in init() w/ a cast 
 	
 	
 	public static void main(String[] args) {
 		Test game = new Test(); 
 		game.init();
-		game.addKeyListener(k);
         game.run(); 
 
         System.exit(0); 
@@ -61,7 +61,6 @@ public class Test extends JFrame implements Runnable {
 		bbg.drawOval(x, 100, 200, 120); 
 		
 		if(k.pressAct1()){
-			//System.out.println("P is pressed");
 			bbg.drawString("A is pressed", 100, 100);
 		}
 		else{
@@ -92,7 +91,7 @@ public class Test extends JFrame implements Runnable {
 	    setFocusable(true);
 	    requestFocusInWindow();
 	    setResizable(true);
-	    addKeyListener(k);
+	    addKeyListener((KeyListener) k);
      
 	    //buffering
 	    backBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB); 
