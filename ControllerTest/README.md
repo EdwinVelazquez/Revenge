@@ -9,7 +9,7 @@ Which can be found here - [http://goo.gl/kOWfCw](http://goo.gl/kOWfCw)
 - they all share basic controls (up, down, left, right, start, select, action 1, action 2, action 3, and action 4)
 
 
-######Things to be done
+######Things to be done (this can be added after everything else is done, if there is time, for now this part is done)
 - avoid having more duplicate instance (avoid having 2 player with the same remote)
 - add exceptions (maybe)
   - when remote does't exist
