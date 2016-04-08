@@ -68,9 +68,18 @@ public class PS3Control extends Control{
 	public boolean pressStart(){
 		return control.isPressed(PS3Controller.START);
 	}
-	
-	
-	
+	public float getLX(){
+		return control.joystick(PS3Controller.L_X);
+	}
+	public float getLY(){
+		return control.joystick(PS3Controller.L_Y);
+	}
+	public float getRX(){
+		return control.joystick(PS3Controller.R_X);
+	}
+	public float getRY(){
+		return control.joystick(PS3Controller.R_Y);
+	}
 
 
 }
