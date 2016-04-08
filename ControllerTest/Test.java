@@ -17,7 +17,7 @@ import javax.swing.JRadioButtonMenuItem;
  ******************************************* 
  * NOTES 
  * tested keyboard
- * Havent tested ps3 remote
+ * Haven't tested ps3 remote
  * This test the controls
  ******************************************* 
  * @author josuerojas
@@ -28,6 +28,10 @@ public class Test extends JFrame implements Runnable {
 	BufferedImage backBuffer;
 	boolean pause = false;
 	int x =100;
+	int y = 100;
+	float sizeX;
+	float sizeY;
+	int s = 1;
 	
 	//this is used for full screen
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -38,7 +42,7 @@ public class Test extends JFrame implements Runnable {
 	int w = 500, h = 500;
 	
 	//controllers
-	Control k; //addKeyListener() in init() w/ a cast 
+	PS3Control k; //addKeyListener() in init() w/ a cast if its a keyboard
 	
 	
 	public static void main(String[] args) {
@@ -58,13 +62,45 @@ public class Test extends JFrame implements Runnable {
 		bbg.fillRect(0, 0, w, h); 
 		
 		bbg.setColor(Color.BLACK); 
-		bbg.drawOval(x, 100, 200, 120); 
+		bbg.drawOval(x, y, (int)(sizeX*100) + 200, (int)(sizeY*100) + 120); 
 		
 		if(k.pressAct1()){
-			bbg.drawString("A is pressed", 100, 100);
+			bbg.drawString("Square is pressed", 100, 120);
+			s = 5;
 		}
 		else{
-			bbg.drawString("A is not pressed", 100, 100);
+			bbg.drawString("Sqaure is not pressed", 100, 120);
+			s = 1;
+		}
+		if(k.pressAct2()){
+			bbg.drawString("Triangle is pressed", 100, 140);
+		}
+		else{
+			bbg.drawString("Triangle is not pressed", 100, 140);
+		}
+		if(k.pressAct3()){
+			bbg.drawString("Circle is pressed", 100, 160);
+		}
+		else{
+			bbg.drawString("Circle is not pressed", 100, 160);
+		}
+		if(k.pressAct4()){
+			bbg.drawString("X is pressed", 100, 180);
+		}
+		else{
+			bbg.drawString("X is not pressed", 100, 180);
+		}
+		if(k.pressSelect()){
+			bbg.drawString("Select is pressed", 100, 200);
+		}
+		else{
+			bbg.drawString("Select is not pressed", 100, 200);
+		}
+		if(k.pressStart()){
+			bbg.drawString("Start is pressed", 100, 220);
+		}
+		else{
+			bbg.drawString("Start is not pressed", 100, 220);
 		}
 		g.drawImage(backBuffer, 0, 0, this);
 		
@@ -74,24 +110,32 @@ public class Test extends JFrame implements Runnable {
 
 	public void update() {
 		if(k.pressLeft()){
-			x--;
+			x = x -s;
 		}
 		else if (k.pressRight()){
-			x++;
+			x = x + s;
 		}
+		if(k.pressUp()){
+			y--;
+		}
+		else if (k.pressDown()){
+			y++;
+		}
+		sizeX = k.getLX();
+		sizeY = k.getLY();
 	}
 
 	/**
 	 * this method initializes everything
 	 */
 	public void init() {
-		k = new KeyboardControl();
+		k = new PS3Control();
 		setTitle("Game"); 
 		setSize(w, h); 
 	    setFocusable(true);
 	    requestFocusInWindow();
 	    setResizable(true);
-	    addKeyListener((KeyListener) k);
+	    //addKeyListener((KeyListener) k);
      
 	    //buffering
 	    backBuffer = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB); 
@@ -104,7 +148,6 @@ public class Test extends JFrame implements Runnable {
 	/**
 	 * this is sort of like the main() but in a loop
 	 */
-	@Override
 	public void run() {
 		
 		while (true) {
