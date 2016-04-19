@@ -10,17 +10,14 @@ import java.io.IOException;
  * for now it will have basic methods (just read on existing file.)
  ***************************************************
  *To Do
- *write to csv
- **add rows
+ *edit to csv
  **add columns?
  ***************************************************
  *NOTE:
  *this only does basic reading of a csv file
- *it does not write or create a csv file
  ***************************************************
  ***************************************************
  * @author josuerojas
- * the reading part of the code was inspired by http://www.mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
  *
  */
 public class CSV {
