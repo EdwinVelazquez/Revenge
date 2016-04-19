@@ -41,6 +41,30 @@ public class SaveGame extends CSV{
 		return this.readColumn(name,true);
 	}
 	/**
+	 * this method changes 'Name' in the given row
+	 * @param newName the new Name to replace the old one
+	 * @param row the row of the location
+	 */
+	public void setName(String newName, int row){
+		s.editColumn(newName, row, name);
+	}
+	/**
+	 * this method changes the 'Score' in the given row
+	 * @param newScore the new score to replace the old
+	 * @param row the row of the location
+	 */
+	public void setScore(int newScore,int row){
+		s.editColumn("" + newScore, row, maxScores);
+	}
+	/**
+	 * this method changes the 'Level' in the given row
+	 * @param newLevel the new level to replace the old
+	 * @param row the row of the location
+	 */
+	public void setLevel(int newLevel, int row){
+		s.editColumn("" + newLevel, row, hLevel);
+	}
+	/**
 	 * get the 'Highest Level' column
 	 * @return a string array of levels
 	 */
@@ -69,7 +93,11 @@ public class SaveGame extends CSV{
 		}
 		//String[] a = {"player","12312"};
 		//s.addRow(a);
-		System.out.println(s.getAverage());
+		//String[][] all = s.getAllRows();
+		//System.out.println(all[1][1]);
+		//System.out.println(all[1][0]);
+		//System.out.println(s.getNumRows());
+		//s.clearAllRows();System.out.println(s.numRows);
 	  }
 	
 
