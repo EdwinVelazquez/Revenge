@@ -251,8 +251,7 @@ public class CSV {
 		int returnInt = 0; //the line number
 		try{
 			buffRead = new BufferedReader(new FileReader(fileName));
-			String line;
-			while ((line = buffRead.readLine()) != null) {
+			while ((buffRead.readLine()) != null) {
 				returnInt++;
 			}
 		}
