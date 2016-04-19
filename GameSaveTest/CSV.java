@@ -7,18 +7,16 @@ import java.io.IOException;
 
 /**
  * this class handles csv files similar to the python package
- * for now it will have basic methods (just read on existing file.)
+ * for now it will have basic methods
  ***************************************************
  *To Do
- *edit to csv
  **add columns?
  ***************************************************
  *NOTE:
- *this only does basic reading of a csv file
+ *this only does basic reading and writing of a csv file
  ***************************************************
  ***************************************************
  * @author josuerojas
- *
  */
 public class CSV {
 	
@@ -26,7 +24,9 @@ public class CSV {
 	String splitBy; //what you are going to split this by
 	BufferedReader buffRead = null;
 	BufferedWriter buffWrite = null;
-	int numColumns; //might not need this
+	
+	int numColumns; 
+	int numRows;
 	
 	/**
 	 * constructor
@@ -37,6 +37,7 @@ public class CSV {
 		this.fileName = fileName;
 		this.splitBy = splitBy;
 		this.numColumns = getNumColumns();
+		this.numRows = getNumRows();
 	}
 	/**
 	 * other constructor where the default splitBy is ","
@@ -46,6 +47,7 @@ public class CSV {
 		this.fileName = fileName;
 		this.splitBy = ",";
 		this.numColumns = getNumColumns();
+		this.numRows = getNumRows();
 	}
 	/**
 	 * this method is needed for getting just a column
@@ -78,18 +80,21 @@ public class CSV {
 	
 	/**
 	 * this method returns a String[] of the row in a csv file
+	 * assumes the row exist *NEED TO TEST THIS
 	 * @param row which row to return
-	 * @return a String array of what the row contains, returns null if nothing is there
+	 * @return a String array of what the row contains, returns {""} if nothing is there
 	 */
 	public String[] readRow(int row){
-		String[] returnString = null; //represents the string going to be return 
 		String line = ""; //represents the line
+		//if(row < 0){
+			//return line.split(",");
+		//}
 		try{
 			buffRead = new BufferedReader(new FileReader(fileName));
 			int lineNum = 0; //the line number
 			while ((line = buffRead.readLine()) != null) {
-				if(lineNum == row){
-					return returnString = line.split(splitBy);
+				if(lineNum == row){ //add an if to avoid going through the whole file and row doesn't exist
+					return line.split(splitBy);
 				}
 				lineNum++; 
 			}
@@ -108,7 +113,7 @@ public class CSV {
 			}
 		}
 	}
-		return returnString;
+		return line.split(",");
 	}
 	/**
 	 * this method gets the column from a csv file
@@ -116,7 +121,6 @@ public class CSV {
 	 * @return a String[] of what the column contains
 	 */
 	public String[] readColumn(int column){
-		String[] returnString = null;
 		String line = "";
 		String returnStringA = "" ; //this will contain all the words in the columns
 		//String split = "";
@@ -148,7 +152,8 @@ public class CSV {
 			}
 		}
 	}
-		return returnString = returnStringA.split(",");	
+		//String[] returnString = null;
+		return  returnStringA.split(",");	
 		}
 	
 	/**
@@ -160,7 +165,6 @@ public class CSV {
 		if(!skip1stLine){
 			return readColumn(column);
 		}
-		String[] returnString = null;
 		String line = "";
 		String returnStringA = ""; //this will contain all the words in the columns
 		try{
@@ -195,65 +199,8 @@ public class CSV {
 		}
 	}
 		//test this on an empty string later
-		return returnString = returnStringA.split(",");	
+		return returnStringA.split(",");	
 		}
-	
-	/*
-	 *useless method for now.(may come back to this for another idea)
-	/**
-	 * this method gets the column from a csv file (with)out the first line if returnInt is true then tries to convert to integers
-	 * Note this does wil return an error and will crash if it cannot be converted to integer
-	 * @param column the column number (starting with 0)
-	 * @param skip1stLine
-	 * @param returnInt
-	 * @return a Object[] of what the column contains an Object to avoid conflicts between String[] and int[]
-	 *
-	public Object[] readColumn(int column, boolean skip1stLine, boolean returnInt){
-		if(!returnInt){
-			return readColumn(column,skip1stLine);
-		}
-		
-		String line = "";
-		String returnStringA = ""; //this will contain all the words in the columns
-		try{
-			buff = new BufferedReader(new FileReader(fileName));
-			int lineNum = 0; //the line number
-			if(skip1stLine){
-				buff.readLine();
-			}
-			while ((line = buff.readLine()) != null) {
-				//System.out.println(line);
-				//have to check if the column exist or else...
-				if(column < numColumns){
-					returnStringA = returnStringA + "," + line.split(splitBy)[column];
-				}
-			}
-		}
-		//exceptions
-	 catch (FileNotFoundException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
-	} finally {
-		if (buff != null) {
-			try {
-				buff.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-		String[] stringA = returnStringA.split(",");
-		Object[] returnArray  = new Object[stringA.length];
-		//convert to integer need to check integers
-		for(int i = 0; i < stringA.length; i++){
-			returnArray[i] = Integer.parseInt(stringA[i]);
-		}
-		//test this on an empty string later
-		return returnArray;
-		}
-	*/
-	
 	/**
 	 * this method adds a row to a csv file
 	 * @param input the row you want to add to the csv
@@ -267,6 +214,7 @@ public class CSV {
 				buffWrite = new BufferedWriter(new FileWriter(fileName,true));
 				buffWrite.newLine();
 				buffWrite.append(String.join(",",input));
+				numRows++; //update the number of rows
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -278,6 +226,103 @@ public class CSV {
 					catch(IOException e){
 						e.printStackTrace();
 					}
+				}
+			}
+		}
+	}
+	/**
+	 * this method gets all rows in the csv file
+	 * this method is necessary for 
+	 * @return all rows with their columns 
+	 */
+	private String[][] getAllRows(){
+		String[][] returnArray = new String[numRows][numColumns];
+		for(int i = 0; i < numRows; i++){
+			returnArray[i] = readRow(i);
+		}
+		return returnArray;
+		
+	}
+	/**
+	 * this method gets the number of rows in the csv file.
+	 * @return an integer of number of rows
+	 */
+	public int getNumRows(){
+		int returnInt = 0; //the line number
+		try{
+			buffRead = new BufferedReader(new FileReader(fileName));
+			String line;
+			while ((line = buffRead.readLine()) != null) {
+				returnInt++;
+			}
+		}
+		//exceptions
+	 catch (FileNotFoundException e) {
+		e.printStackTrace();
+	} catch (IOException e) {
+		e.printStackTrace();
+	} finally {
+		if (buffRead != null) {
+			try {
+				buffRead.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+		return returnInt;
+	}
+	/**
+	 * this method edits a whole row for a csv fle
+	 * NOTE: this does not check if row exist
+	 * @param input row that will replace previous
+	 * @param row which row is it in
+	 */
+	public void editRow(String[] input, int row){
+		//to edit a row you need to write the whole document all over
+		String[][] allRows = getAllRows(); //all the rows and columns
+		allRows[row] = input; //replace the row
+		//clear the rows
+		clearAllRows();
+		//write everything
+		for(int i = 0; i < allRows.length; i++){
+			addRow(allRows[i]);
+		}
+		
+	}
+	/**
+	 * this method edits a column in a row in the csv file
+	 * @param input the string that replaces the current one
+	 * @param row the row location
+	 * @param column the column location
+	 */
+	public void editColumn(String input, int row, int column){
+		String[] rowString = readRow(row); //get the whole row
+		rowString[column] = input; //replace the column
+		editRow(rowString,row); //put it in the csv file
+	}
+	
+	/**
+	 * this method clears all rows in the csv file
+	 * this method is necessary for editing rows. 
+	 */
+	private void clearAllRows(){
+		try {
+			//use the append mode in FileWriter
+			buffWrite = new BufferedWriter(new FileWriter(fileName));
+			buffWrite.newLine();
+			//buffWrite.append(String.join(",",input));
+			numRows = 0; //update the number of rows
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		finally{
+			if(buffWrite != null){
+				try{
+					buffWrite.close();
+				}
+				catch(IOException e){
+					e.printStackTrace();
 				}
 			}
 		}
