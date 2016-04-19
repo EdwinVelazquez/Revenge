@@ -8,12 +8,15 @@ These folder consist of 2 java files and one csv file. The class CSV contains si
 - Ability to add rows to csv file
 - Ability to get all scores
 - Ability to get all names
+- Ability to get the top level (will change according to the game)
+- Ability to get average of all scores
 
 
 ###### Things To Be Added Later
-- Edit scores
-- Edit names?
-- Add more columns according to the game
+- Ability to edit scores (so they can be updated)
+- Ability to add more columns according to the game
+- sort rows when adding them to keep the looking tidy
+- Ability to delete rows (might be overdoing it if the game is simple, seems easy though)
+- Ability to clear all data (again not necessary)
 - Stats?
--delete rows
--clear all data
+- Ability Edit names?
