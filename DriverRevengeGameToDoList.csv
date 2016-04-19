@@ -1,33 +1,32 @@
-,To-do list,,Completed by:,Edwin Velazquez
-,,,Deadline:,4/30/2016
-,Done?,Revenge,Due By,Notes
-,Yes,Planning,4/1/2016,Edwin
-,Yes,Create Tasks,4/4/2016,Edwin
-,No,Task a,4/18/2011,
-,No,Decompose Tasks,4/6/2016,All
-,,,,
-,,Tasks,,
-,Yes,Get Background(s),4/8/2016,Edwin
-,Yes,Get Sprites(s),4/8/2016,Edwin
-,Yes,Get Music,4/10/2016,Edwin
-,Yes,Make Sound effects,4/12/2016,Edwin
-,No,Get Voiceovers?,4/12/2016,Edwin
-,No,Main Class,4/12/2016,
-,No,Tile Map,12-Apr,
-,No,Road,4/12/2016,
-,No,Biker class,4/12/2016,Edwin
-,No,Skateboard class,4/14/2016,Josue
-,No,Car class,4/14/2016,Josue
-,No,Truck class,4/16/2016,
-,No,Bicycle class,4/18/2016,
-,No,Player movement,4/20/2016,Josue
-,No,Enemy movements,4/22/2016,Josue
-,No,Scrolling,4/24/2016,
-,No,Camera and Movement,4/25/2016,
-,No,Weapons,4/26/2016,
-,No,Implement Sound,4/27/2016,Edwin
-,No,Scoring,4/27/2016,
-,No,Game controls,4/28/2016,Josue
-,No,Merge classes,4/29/2016,
-,No,Levels?,4/30/2016,
-,No,Testing,4/30/2016,
+Done?,Task,Due By,Chosen One,Notes,,To-do list Completed by:Edwin Velazquez    Deadline:4/30/2016
+Yes,Planning,4/1/2016,Edwin,,,
+Yes,Create Tasks,4/4/2016,Edwin,,,
+No,Decompose Tasks,4/6/2016,All,,,
+,,,,,,
+,,,,,,
+,,,,,,
+Yes,Get Background(s),4/8/2016,Edwin,,,
+Yes,Get Sprites(s),4/8/2016,Edwin,,,
+Yes,Get Music,4/10/2016,Edwin,,,
+Yes,Make Sound effects,4/12/2016,Edwin,,,
+No,Get Voiceovers?,4/12/2016,Edwin,,,
+No,Main Class,4/12/2016,,,,
+No,Tile Map,4/12/2016,,,,
+No,Road,4/12/2016,,,,
+No,Biker class,4/12/2016,Edwin,,,
+No,Skateboard class,4/14/2016,Josue,,,
+No,Car class,4/14/2016,Josue,,,
+No,Truck class,4/16/2016,,,,
+No,Bicycle class,4/18/2016,,,,
+No,Player movement,4/20/2016,Josue,,,
+No,Enemy movements,4/22/2016,Josue,,,
+No,Scrolling,4/24/2016,,,,
+No,Camera and Movement,4/25/2016,,,,
+No,Weapons,4/26/2016,,,,
+No,Implement Sound,4/27/2016,Edwin,,,
+No,Scoring,4/27/2016,,,,
+No,Game controls,4/28/2016,Josue,,,
+No,Save Game Data,,Josue,gets added more things as game gets more complicated,,
+No,Merge classes,4/29/2016,,,,
+No,Levels?,4/30/2016,,,,
+No,Testing,4/30/2016,,,,
