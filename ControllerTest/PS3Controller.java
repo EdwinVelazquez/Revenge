@@ -43,9 +43,9 @@ public class PS3Controller {
 	final static int R3           = 6;
 	final static int START        = 7;
 	final static int UP           = 8;
-	final static int LEFT         = 9;
+	final static int LEFT         = 11;
 	final static int DOWN         = 10;
-	final static int RIGHT        = 11;
+	final static int RIGHT        = 9;
 	final static int L2           = 12;
 	final static int R2           = 13;
 	final static int L1           = 14;
