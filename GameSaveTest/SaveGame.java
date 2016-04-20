@@ -1,4 +1,9 @@
-
+/**
+ * this class extends CSV.java. This is suppose to handle saving data to a CSV file called 'saveGame'
+ * most of the methods are static because there only exist one CSV file for the save game. 
+ * @author josuerojas
+ *
+ */
 public class SaveGame extends CSV{
 	
 	//list of the names in csv file
@@ -10,9 +15,9 @@ public class SaveGame extends CSV{
 	//saveGame is static cause there is only one. 
 	static SaveGame s = new SaveGame();
 	//static arrays of the columns (because there is only one saveGame.csv)
-	static String names[] = s.getAllNames();
-	static int[] scores = s.getAllScores();
-	static String[] highestLevel = s.getLevel();
+	//static String names[] = s.getAllNamesCSV();
+	//static int[] scores = s.getAllScoresCSV();
+	//static String[] highestLevel = s.getAllLevelCSV();
 
 	public SaveGame() {
 		//file needs to be in the same folder or give the path of the file
@@ -24,8 +29,8 @@ public class SaveGame extends CSV{
 	 * NOTE will return error if score is not a int
 	 * @return a int array of all score
 	 */
-	public int[] getAllScores(){
-		String[] score = this.readColumn(maxScores,true);
+	public static int[] getAllScores(){
+		String[] score = s.readColumn(maxScores,true);
 		int[] returnArray = new int[score.length];
 		//might move this block into its own method if more things are ints or might make another method in the super class
 		for(int i = 0; i < score.length; i++){
@@ -37,15 +42,22 @@ public class SaveGame extends CSV{
 	 * this method gets all names in the saveGame.csv
 	 * @return string array of all names
 	 */
-	public String[] getAllNames(){
-		return this.readColumn(name,true);
+	public static String[] getAllNames(){
+		return s.readColumn(name,true);
+	}
+	/**
+	 * get the 'Highest Level' column
+	 * @return a string array of levels
+	 */
+	public static String[] getAllLevel(){
+		return s.readColumn(hLevel,true);
 	}
 	/**
 	 * this method changes 'Name' in the given row
 	 * @param newName the new Name to replace the old one
 	 * @param row the row of the location
 	 */
-	public void setName(String newName, int row){
+	public static void setName(String newName, int row){
 		s.editColumn(newName, row, name);
 	}
 	/**
@@ -53,7 +65,7 @@ public class SaveGame extends CSV{
 	 * @param newScore the new score to replace the old
 	 * @param row the row of the location
 	 */
-	public void setScore(int newScore,int row){
+	public static void setScore(int newScore,int row){
 		s.editColumn("" + newScore, row, maxScores);
 	}
 	/**
@@ -61,21 +73,23 @@ public class SaveGame extends CSV{
 	 * @param newLevel the new level to replace the old
 	 * @param row the row of the location
 	 */
-	public void setLevel(int newLevel, int row){
+	public static void setLevel(int newLevel, int row){
 		s.editColumn("" + newLevel, row, hLevel);
 	}
 	/**
-	 * get the 'Highest Level' column
-	 * @return a string array of levels
+	 * this method adds a new row to the saveGame.csv
+	 * @param input the string array that will be inserted
 	 */
-	public String[] getLevel(){
-		return this.readColumn(hLevel,true);
+	public static void addNewRow(String[] input){
+		s.addRow(input);
 	}
+	
 	/**
 	 * this method gets the average score
 	 * @return a float of the average score
 	 */
-	public float getAverage(){
+	public static float getAverage(){
+		int[] scores = s.getAllScores();
 		float sum = 0;
 		for(int i = 0; i < scores.length; i++){
 			sum = sum + scores[i];
@@ -83,16 +97,14 @@ public class SaveGame extends CSV{
 		return sum/scores.length;
 	}
 	
-	
 	//testing purpose
 	public static void main(String args[])
 	  {	
-		for(int i = 0; i < scores.length;i++){
-			System.out.println(names[i]);			
-			System.out.println(scores[i]);
+		for(int i = 0; i < s.numRows-1;i++){
+			System.out.println(s.getAllNames()[i]);			
 		}
-		//String[] a = {"player","12312"};
-		//s.addRow(a);
+		String[] a = {"player","12312","1"};
+		s.addRow(a);
 		//String[][] all = s.getAllRows();
 		//System.out.println(all[1][1]);
 		//System.out.println(all[1][0]);
