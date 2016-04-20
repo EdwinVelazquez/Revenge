@@ -56,11 +56,11 @@ public class PS3Control extends Control{
 	public boolean pressAct2(){
 		return control.isPressed(PS3Controller.TRIANGLE);
 	}
+	public boolean pressAct4(){
+		return control.isPressed(PS3Controller.X);
+	}
 	public boolean pressAct3(){
 		return control.isPressed(PS3Controller.CIRCLE);
-	}
-	public boolean presstAct4(){
-		return control.isPressed(PS3Controller.X);
 	}
 	public boolean pressSelect(){
 		return control.isPressed(PS3Controller.SELECT);
@@ -80,6 +80,9 @@ public class PS3Control extends Control{
 	public float getRY(){
 		return control.joystick(PS3Controller.R_Y);
 	}
+	
+	
+	
 
 
 }
