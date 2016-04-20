@@ -17,7 +17,6 @@ import javax.swing.JRadioButtonMenuItem;
  ******************************************* 
  * NOTES 
  * tested keyboard
- * needs to fix x button on ps3control (might be control, not sure)
  * This test the controls
  ******************************************* 
  * @author josuerojas
