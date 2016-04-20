@@ -27,6 +27,7 @@ public class CSV {
 	
 	int numColumns; 
 	int numRows;
+	//debating whether to put numColumns, and numRows without the first line (-1)
 	
 	/**
 	 * constructor
