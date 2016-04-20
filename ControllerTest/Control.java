@@ -30,7 +30,6 @@ public abstract class Control{
 	boolean Start = false;
 	
 	public Control(){
-		
 	}
 	public boolean pressUp() {
 		return Up;
