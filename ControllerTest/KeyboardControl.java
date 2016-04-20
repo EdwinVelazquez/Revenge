@@ -25,6 +25,7 @@ public class KeyboardControl extends Control implements KeyListener{
 
 	//constructor is just the default constructor since there should only be one keyboard
 	
+	
 	@Override
 	public void keyTyped(KeyEvent e) {
 	}
