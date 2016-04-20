@@ -17,7 +17,7 @@ import javax.swing.JRadioButtonMenuItem;
  ******************************************* 
  * NOTES 
  * tested keyboard
- * Haven't tested ps3 remote
+ * needs to fix x button on ps3control (might be control, not sure)
  * This test the controls
  ******************************************* 
  * @author josuerojas
@@ -84,12 +84,14 @@ public class Test extends JFrame implements Runnable {
 		else{
 			bbg.drawString("Circle is not pressed", 100, 160);
 		}
+		
 		if(k.pressAct4()){
 			bbg.drawString("X is pressed", 100, 180);
 		}
 		else{
 			bbg.drawString("X is not pressed", 100, 180);
 		}
+		
 		if(k.pressSelect()){
 			bbg.drawString("Select is pressed", 100, 200);
 		}
@@ -102,6 +104,7 @@ public class Test extends JFrame implements Runnable {
 		else{
 			bbg.drawString("Start is not pressed", 100, 220);
 		}
+		
 		g.drawImage(backBuffer, 0, 0, this);
 		
 		
