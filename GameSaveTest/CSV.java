@@ -213,8 +213,8 @@ public class CSV {
 			try {
 				//use the append mode in FileWriter
 				buffWrite = new BufferedWriter(new FileWriter(fileName,true));
-				buffWrite.newLine();
 				buffWrite.append(String.join(",",input));
+				buffWrite.newLine();
 				numRows++; //update the number of rows
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -231,12 +231,13 @@ public class CSV {
 			}
 		}
 	}
+	
 	/**
 	 * this method gets all rows in the csv file
 	 * this method is necessary for 
 	 * @return all rows with their columns 
 	 */
-	private String[][] getAllRows(){
+	protected String[][] getAllRows(){
 		String[][] returnArray = new String[numRows][numColumns];
 		for(int i = 0; i < numRows; i++){
 			returnArray[i] = readRow(i);
@@ -278,7 +279,7 @@ public class CSV {
 	 * @param input row that will replace previous
 	 * @param row which row is it in
 	 */
-	public void editRow(String[] input, int row){
+	public void editRows(String[] input, int row){
 		//to edit a row you need to write the whole document all over
 		String[][] allRows = getAllRows(); //all the rows and columns
 		allRows[row] = input; //replace the row
@@ -299,18 +300,18 @@ public class CSV {
 	public void editColumn(String input, int row, int column){
 		String[] rowString = readRow(row); //get the whole row
 		rowString[column] = input; //replace the column
-		editRow(rowString,row); //put it in the csv file
+		editRows(rowString,row); //put it in the csv file
 	}
 	
 	/**
 	 * this method clears all rows in the csv file
 	 * this method is necessary for editing rows. 
 	 */
-	private void clearAllRows(){
+	protected void clearAllRows(){
 		try {
 			//use the append mode in FileWriter
 			buffWrite = new BufferedWriter(new FileWriter(fileName));
-			buffWrite.newLine();
+			buffWrite.write("");
 			//buffWrite.append(String.join(",",input));
 			numRows = 0; //update the number of rows
 		} catch (IOException e) {
