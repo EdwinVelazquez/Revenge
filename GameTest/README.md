@@ -1,7 +1,7 @@
 #Readme for GameTest folder
 
-##This will be the main folder for the game
+######This will be the main folder for the game
 
-##Things Done
+######Things Done
 
-##Things To Do
+######Things To Do
