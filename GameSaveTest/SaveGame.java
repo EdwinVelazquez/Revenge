@@ -79,7 +79,7 @@ public class SaveGame extends CSV {
 	}
 
 	/**
-	 * this method changes the 'Score' in the given row
+	 * this method changes the 'Score' in the given row. THIS NEEDS TO BE FIX TO SORT IT
 	 * 
 	 * @param newScore
 	 *            the new score to replace the old
@@ -158,13 +158,26 @@ public class SaveGame extends CSV {
 
 	}
 
+	/**
+	 * this method edits the score in a row and sorts it.
+	 * @param score new score (in a game this should only change when the score is higher)
+	 * @param row the location of the row that is going to be edited. 
+	 */
+	public static void setScoreSorted(int score, int row){
+		String[] newRow = s.readRow(row); //get row that is going to change
+		newRow[maxScores] = "" + score; //change the score
+		s.removeRow(row); //remove the row
+		s.addSorted(newRow);
+		
+	}
 	// testing purpose
 	public static void main(String args[]) {
 		for (int i = 0; i < s.numRows - 1; i++) {
 			System.out.println(s.getAllNames()[i]);
 		}
 		String[] a = { "player", "100", "1" };
-		s.addSorted(a);
+		//s.addSorted(a);
+		s.setScoreSorted(9999, 10);
 		// String[][] all = s.getAllRows();
 		// System.out.println(all[1][1]);
 		// System.out.println(all[1][0]);
