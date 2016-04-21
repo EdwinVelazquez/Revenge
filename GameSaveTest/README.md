@@ -8,12 +8,13 @@ These folder consist of 2 java files and one csv file. The class CSV contains si
 - CSV.java
   - Ability to add rows to csv file
   - Ability to get row or column
+  - Ability to remove rows
   - Ability to write new row
   - Ability to edit rows and columns
 - SaveGame.java
   - Ability to add sorted rows in saveGame
   - Ability to get all scores, names, level (will change according to the game)
-  - Ability to edit score(still needs work), names, and level
+  - Ability to edit score(better to use setScoreSorted), names, and level
   - Ability to get average of all scores
 
 
@@ -24,7 +25,6 @@ These folder consist of 2 java files and one csv file. The class CSV contains si
   - Ability to delete rows (might be overdoing it if the game is simple, seems easy though)
 
 - SaveGame.java
-  - Edi Scores and sort it after ***
   - Ability to clear all data (again not necessary)(this can be done in csv but it does not leave the top row)
   - Stats?
   - Ability Edit names?
