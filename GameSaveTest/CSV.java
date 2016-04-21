@@ -117,6 +117,24 @@ public class CSV {
 		return line.split(",");
 	}
 	/**
+	 * this method can remove a row from a csv file 
+	 * @param row the row that is going to be remove
+	 */
+	public void removeRow(int row){
+		//to edit a row you need to write the whole document all over
+		String[][] allRows = getAllRows(); //all the rows and columns
+		//allRows[row] = input; //replace the row
+		//clear the rows
+		clearAllRows();
+		//write everything
+		for(int i = 0; i < row; i++){
+			addRow(allRows[i]);
+			}
+		for(int i = row+1; i< allRows.length; i++){
+			addRow(allRows[i]);
+		}
+	}
+	/**
 	 * this method gets the column from a csv file
 	 * @param column the column number (starting with 0)
 	 * @return a String[] of what the column contains
