@@ -5,7 +5,7 @@ import java.awt.event.MouseListener;
 import java.util.Vector;
 
 /**
- * this class is suppose to be a basic control class that with all basic controls
+ * this class is control object that will have basic controls
  * the purpose is to be able to join together different controls (not using Vector) into an array
  * basically manage all controls by letting them be the same type
  * @author josuerojas
