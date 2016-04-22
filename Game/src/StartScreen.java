@@ -8,6 +8,7 @@ import java.awt.Graphics;
 public class StartScreen {
 	
 	static Title t = new Title();
+	static Background b = new Background();
 	static int width;
 	static int height;
 	static int middleX;
@@ -17,10 +18,9 @@ public class StartScreen {
 		this.height = height;
 		this.middleX = width/2;
 		this.middleY = height/2;
+		System.out.println(width + " width " + height + " height");
 	}
 	public void draw(Graphics g){
-		t.draw(g, middleX,middleY);
-		t.draw(g, 300,400);
-		t.draw(g, 100,200);
+		t.draw(g, 300,300);
 	}
 }
