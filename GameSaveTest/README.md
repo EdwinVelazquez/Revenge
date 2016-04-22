@@ -22,7 +22,6 @@ These folder consist of 2 java files and one csv file. The class CSV contains si
 ###### Things To Be Added Later
 - CSV.java
   - Ability to add more columns
-  - Ability to delete rows (might be overdoing it if the game is simple, seems easy though)
 
 - SaveGame.java
   - Ability to clear all data (again not necessary)(this can be done in csv but it does not leave the top row)
