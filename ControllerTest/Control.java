@@ -1,9 +1,3 @@
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.Vector;
-
 /**
  * this class is control object that will have basic controls
  * the purpose is to be able to join together different controls (not using Vector) into an array
