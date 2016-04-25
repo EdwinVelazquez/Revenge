@@ -11,16 +11,12 @@ public class StartScreen {
 	static Background b = new Background();
 	static int width;
 	static int height;
-	static int middleX;
-	static int middleY;
 	public StartScreen(int width, int height){
 		this.width = width;
 		this.height = height;
-		this.middleX = width/2;
-		this.middleY = height/2;
-		System.out.println(width + " width " + height + " height");
+
 	}
 	public void draw(Graphics g){
-		t.draw(g, 300,300);
+		t.draw(g, 0,0); //needs to be fix to calculate the middle for different dimensions
 	}
 }
