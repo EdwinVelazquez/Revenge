@@ -24,7 +24,10 @@ import javax.swing.JRadioButtonMenuItem;
 public class Revenge extends JFrame implements Runnable {
 	
 	BufferedImage backBuffer;
+	//the following booleans are for which screen to show
 	boolean pause = false;
+	boolean start = true;
+	boolean select = false;
 	StartScreen startScreen;
 	//this is used for full screen
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -32,6 +35,10 @@ public class Revenge extends JFrame implements Runnable {
 	int fullH = (int) screenSize.getHeight();
 
 	KeyboardControl k = new KeyboardControl();
+	int time;
+	int delay; //delay for button presses
+	
+	
 	public static void main(String[] args) {
 		Revenge game = new Revenge(); 
 		game.init();
@@ -46,8 +53,21 @@ public class Revenge extends JFrame implements Runnable {
 		Graphics bbg = backBuffer.getGraphics(); 
 		bbg.setColor(Color.WHITE); 
 		bbg.fillRect(0, 0, fullW, fullH);
-		if(!k.pressStart()){
-			startScreen.draw(bbg); 
+		bbg.setColor(Color.black);
+		bbg.drawString("Time: " + time, 20, 40);
+		if(start){
+			if(select){
+				//selectScreen.draw() should go here.
+				//this screen should be where the credits are given. or the info
+				bbg.drawString("Press select", 20, 60);
+			}
+			else{
+				bbg.drawString("Press not select", 20, 60);
+				startScreen.draw(bbg); 
+			}
+		}
+		else{
+			//start game here
 		}
 		g.drawImage(backBuffer, 0, 0, this);
 		
@@ -56,13 +76,24 @@ public class Revenge extends JFrame implements Runnable {
 	}
 	
 	public void update() {
+		time++;
+		delay++;
+		//change the screen 
+		if(k.pressStart()){
+			start = false;
+		}
+		//if it is the start screen and press select when the delay is greater than 30
+		if(start && k.pressSelect() && delay > 30){
+			select = !select;
+			delay = 0;
+		}
 	}
 
 	/**
 	 * this method initializes everything
 	 */
 	public void init() {
-		setTitle("Driver's Revenge"); 
+		setTitle("Driver's Revenge"); //title
 		setSize(fullW, fullH); 
 	    setFocusable(true);
 	    requestFocusInWindow();
@@ -74,6 +105,9 @@ public class Revenge extends JFrame implements Runnable {
 	    startScreen = new StartScreen(fullW,fullH);
 	    setDefaultCloseOperation(EXIT_ON_CLOSE); 
 	    setVisible(true); 
+	    //time is a clock for keeping track of delays etc
+	    time = 0;
+	    delay = 0;
 	
 	}
 
