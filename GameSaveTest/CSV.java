@@ -20,8 +20,8 @@ import java.io.IOException;
  */
 public class CSV {
 	
-	String fileName; //is the whole location, if it is not in the same folder
-	String splitBy; //what you are going to split this by
+	private String fileName; //is the whole location, if it is not in the same folder
+	private String splitBy; //what you are going to split this by
 	BufferedReader buffRead = null;
 	BufferedWriter buffWrite = null;
 	
