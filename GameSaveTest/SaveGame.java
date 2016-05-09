@@ -105,8 +105,7 @@ public class SaveGame extends CSV {
 	/**
 	 * this method adds a new row to the saveGame.csv (not sorted). Use the addSorted() to keep the csv tidy.
 	 * 
-	 * @param input
-	 *            the string array that will be inserted
+	 * @param input the string array that will be inserted
 	 */
 	public static void addNewRow(String[] input) {
 		s.addRow(input);
@@ -138,13 +137,13 @@ public class SaveGame extends CSV {
 		String[][] allRows = s.getAllRows();
 		s.clearAllRows();
 		boolean change = false;
-		for(int i = 0; i < allRows[0].length;i++){
-			System.out.println(allRows[0][i]);
-		}
+		//for(int i = 0; i < allRows[0].length;i++){
+			//System.out.println(allRows[0][i]);
+		//}
 		s.addRow(allRows[0]); //add the first line
 		
 		for(int i = 1; i < allRows.length; i++){
-			System.out.println(allRows.length);
+			//System.out.println(allRows.length);
 			if(!change && Integer.parseInt(allRows[i][s.maxScores]) <= Integer.parseInt(newRow[maxScores])){
 				change = true; //make it escape the infinite loop	
 				s.addRow(newRow); //add the new row
@@ -170,14 +169,36 @@ public class SaveGame extends CSV {
 		s.addSorted(newRow);
 		
 	}
+	public static String[] getPlayerInfo(String player){
+		//first get all names and compare
+		String[] names = s.readColumn(name);
+		for(int i = 0; i < names.length; i++){
+			if(names[i].toLowerCase().equals(player.toLowerCase())){
+				return s.readRow(i);
+			}
+		}
+		//if it is done with the loop then it didnt find it so...
+		String[] newName = {player,"0","0"};
+		s.addNewRow(newName);
+		return newName;
+	}
 	// testing purpose
 	public static void main(String args[]) {
-		for (int i = 0; i < s.numRows - 1; i++) {
-			System.out.println(s.getAllNames()[i]);
+		String[] player5 = s.getPlayerInfo("player5");
+		for(int i = 0; i < player5.length; i++){
+			System.out.println(player5[i]);
 		}
-		String[] a = { "player", "100", "1" };
+		
+		String[] player12 = s.getPlayerInfo("player12");
+		for(int i = 0; i < player12.length; i++){
+			System.out.println(player12[i]);
+		}
+		//for (int i = 0; i < s.numRows - 1; i++) {
+		//	System.out.println(s.getAllNames()[i]);
+		//}
+		//String[] a = { "player", "100", "1" };
 		//s.addSorted(a);
-		s.setScoreSorted(9999, 10);
+		//s.setScoreSorted(9999, 10);
 		// String[][] all = s.getAllRows();
 		// System.out.println(all[1][1]);
 		// System.out.println(all[1][0]);
