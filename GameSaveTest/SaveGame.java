@@ -169,6 +169,11 @@ public class SaveGame extends CSV {
 		s.addSorted(newRow);
 		
 	}
+	/**
+	 * this method gets the player info in a String[]
+	 * @param player String of the player name in the CSV file
+	 * @return a String[] with the player info
+	 */
 	public static String[] getPlayerInfo(String player){
 		//first get all names and compare
 		String[] names = s.readColumn(name);
@@ -182,12 +187,26 @@ public class SaveGame extends CSV {
 		s.addNewRow(newName);
 		return newName;
 	}
+	public static int getPlayerRow(String player){
+		String[] names = s.readColumn(name);
+		for(int i = 0; i < names.length; i++){
+			if(names[i].toLowerCase().equals(player.toLowerCase())){
+				return i;
+			}
+		}
+		//if player doesnt exist then add another one (i dont know if you want to keep this)
+		String[] newName = {player,"0","0"};
+		s.addNewRow(newName);
+		return s.numRows-1;
+	}
 	// testing purpose
 	public static void main(String args[]) {
-		String[] player5 = s.getPlayerInfo("player5");
-		for(int i = 0; i < player5.length; i++){
-			System.out.println(player5[i]);
-		}
+		String[] player21 = s.getPlayerInfo("player21");
+		System.out.println(s.getPlayerRow("Player41"));
+		System.out.println();
+		//for(int i = 0; i < player5.length; i++){
+			//System.out.println(player5[i]);
+		//}
 		
 		String[] player12 = s.getPlayerInfo("player12");
 		for(int i = 0; i < player12.length; i++){
