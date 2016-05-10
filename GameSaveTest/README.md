@@ -17,6 +17,7 @@ These folder consist of 2 java files and one csv file. The class CSV contains si
   - Ability to edit score(better to use setScoreSorted), names, and level
   - Ability to get average of all scores
   - Ability to get player info or if doesn't exist add new player with default score (0)
+  - Ability to get the index row number of player if it doesn't exist then add a new player and return its index
 
 
 
