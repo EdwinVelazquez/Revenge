@@ -1,7 +1,12 @@
 
 
 import java.awt.*;
-
+/**
+ * this class is just animation (not a sprite or layer)
+ * this class is used in the introduction and select screen.
+ * @author josuerojas
+ *
+ */
 public class Animation {
 
 	Image[] image;
@@ -11,6 +16,9 @@ public class Animation {
 	
 	int duration;
 	int countdown;
+	int start = -1;
+	//boolean start = true;
+	
 	
 	
 	
@@ -26,7 +34,27 @@ public class Animation {
 		}
 	}
 	
+	public void setDuration(int dur){
+		this.duration = dur;
+	}
+	
 	public Image getImage(){
+		if(start != numImage){
+			if(start == -1){
+				countdown = 1;
+			}
+			countdown--;
+			if(countdown == 0){
+				countdown = 2;
+				current++;
+				if(current == image.length){
+					current = 0;
+				}
+				start++;
+			}
+			return image[current];
+			
+		}
 		countdown--;
 		if(countdown == 0){
 			countdown = duration;
@@ -44,9 +72,11 @@ public class Animation {
 		
 	}
 	 public void draw(Graphics g,int x, int y) {
+		 
 		 if (getImage() != null){ 
 			 g.drawImage(getImage(), x, y, null);
 		 }
+
 	 }
 		
 	
