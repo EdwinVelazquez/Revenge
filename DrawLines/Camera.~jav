@@ -1,0 +1,109 @@
+import java.awt.*;
+
+public class Camera
+{
+   static int x;
+   static int y;
+
+   static int r;
+
+   static int angle;
+
+   static double cosA;
+   static double sinA;
+
+   static double d;
+
+
+   static int origin_x = 512;
+   static int origin_y = 378;
+
+
+   public static void setup(int x, int y, int r, int angle)
+   {
+      Camera.x = x;
+      Camera.y = y;
+
+      Camera.r = r;
+
+      Camera.angle = angle;
+
+      cosA = Lookup.cos[angle];
+      sinA = Lookup.sin[angle];
+   }
+
+
+   public static void turnToward(PolygonModel p)
+   {
+      double d = (p.x - x) * sinA - (p.y - y) * cosA;
+
+
+      if (d < -4) rotateBy(2);
+
+      if (d > 4) rotateBy(-2);
+
+   }
+   public static void turnAwayFrom(PolygonModel p)
+   {
+      double d = (p.x - x) * sinA - (p.y - y) * cosA;
+
+
+      if (d > -4) rotateBy(2);
+
+      if (d < 4) rotateBy(-2);
+
+   }
+
+   public static boolean hasCollidedWith(Line L)
+   {
+      d = L.distanceTo(x, y);
+
+      return d < r;
+
+   }
+
+
+   public static void pushedBackFrom(Line L)
+   {
+      x +=  (r - d) * L.xN;
+
+      y +=  (r - d) * L.yN;
+   }
+
+
+   public static void rotateBy(int degrees)
+   {
+      angle += degrees;
+
+      if (angle >= 360)  angle -= 360;
+      if (angle <    0)  angle += 360;
+
+      cosA = Lookup.cos[angle];
+      sinA = Lookup.sin[angle];
+   }
+
+
+   public static void moveForwardBy(int dist)
+   {
+      x += (int)(dist*cosA);
+
+      y += (int)(dist*sinA);
+   }
+
+
+
+   public static void draw(Graphics g)
+   {
+
+      g.setColor(Color.yellow);
+
+      g.fillOval(-r + origin_x, -r + origin_y, 2*r, 2*r);
+
+      g.setColor(Color.black);
+      g.drawOval(-r + origin_x, -r + origin_y, 2*r, 2*r);
+
+      g.drawLine(origin_x,  origin_y,  (int)(r*cosA) + origin_x, (int)(r*sinA) + origin_y);
+   }
+
+
+}
