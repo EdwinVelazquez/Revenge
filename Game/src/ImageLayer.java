@@ -1,3 +1,6 @@
+/**
+ * this class is used for layers (background layers) for example the moon will be all the way back and move according to that
+ */
 import java.awt.*;
 
 public class ImageLayer
