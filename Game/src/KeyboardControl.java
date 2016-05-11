@@ -60,5 +60,5 @@ public class KeyboardControl extends Control implements KeyListener{
 		if(key == KeyEvent.VK_P) Start = false;
 		if(key == KeyEvent.VK_O) Select = false;		
 	}
-
+	
 }
