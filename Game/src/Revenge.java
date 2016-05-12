@@ -41,6 +41,12 @@ public class Revenge extends JFrame implements Runnable {
 	//the images are set up for this dimension
 	int fullW = 1440;
 	int fullH = 900;
+	
+	//image layers
+	ImageLayer b1;
+	ImageLayer b2;
+	ImageLayer b3;
+	
 
 	KeyboardControl k = new KeyboardControl();
 	int time;
@@ -84,7 +90,9 @@ public class Revenge extends JFrame implements Runnable {
 			}
 		}
 		else{
-			//start game here
+			b3.draw(bbg);
+			b2.draw(bbg);
+			b1.draw(bbg);
 		}
 		bbg.drawString("Time: " + time, 20, 40);
 		g.drawImage(backBuffer, 0, 0, this);
@@ -113,6 +121,12 @@ public class Revenge extends JFrame implements Runnable {
 			select = !select;
 			delay = 0;
 		}
+		//if you are in the game controls
+		if(start == false){
+			if(k.pressLeft()){
+				Camera.moveBy(-5, 0);
+			}
+		}
 	
 	}
 
@@ -131,7 +145,7 @@ public class Revenge extends JFrame implements Runnable {
 	    //initialize screens
 	    startScreen = new StartScreen(fullW,fullH);
 	    creditScreen = new CreditScreen(fullW,fullH);
-	    background = new Background();
+	    background = new Background(fullW,fullH);
 	    setDefaultCloseOperation(EXIT_ON_CLOSE); 
 	    setVisible(true); 
 	    Camera.setLocation(200, 0);
@@ -140,6 +154,9 @@ public class Revenge extends JFrame implements Runnable {
 	    delay = 0;
 	    player = "Player1"; //starts with default player 'Player1'
 	
+	    b1 = new ImageLayer("trees.gif");
+	    b2 = new ImageLayer("houses.gif", 2);
+	    b3 = new ImageLayer("mountains.gif", 8);
 	}
 
 	/**
