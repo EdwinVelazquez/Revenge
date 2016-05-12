@@ -39,8 +39,8 @@ public class Revenge extends JFrame implements Runnable {
 	//int fullH = (int) screenSize.getHeight();
 	
 	//the images are set up for this dimension
-	int fullW = 1440;
-	int fullH = 900;
+	int fullW = 1024;
+	int fullH = 640;
 	
 	//image layers
 	ImageLayer b1;
