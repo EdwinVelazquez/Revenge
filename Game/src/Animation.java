@@ -18,6 +18,8 @@ public class Animation {
 	int countdown;
 	int start = -1;
 	//boolean start = true;
+	int width = 1440; //default width
+	int height = 900; //default height
 	
 	
 	
@@ -33,6 +35,20 @@ public class Animation {
 			//System.out.println(name + i + extension);
 		}
 	}
+	public Animation(String name, int duration, int n, String extension, int w, int h){
+		image = new Image[n];
+		numImage = n;
+		this.duration = duration;
+		countdown = duration;
+		width = w;
+		height = h;
+		for(int i = 0; i < n; i++){
+			image[i] = Toolkit.getDefaultToolkit().getImage(name + i + extension);
+			//System.out.println(name + i + extension);
+		}
+		
+	}
+	
 	
 	public void setDuration(int dur){
 		this.duration = dur;
@@ -74,7 +90,7 @@ public class Animation {
 	 public void draw(Graphics g,int x, int y) {
 		 
 		 if (getImage() != null){ 
-			 g.drawImage(getImage(), x, y, null);
+			 g.drawImage(getImage(), x, y,width,height, null);
 		 }
 
 	 }
