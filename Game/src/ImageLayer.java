@@ -69,11 +69,10 @@ public class ImageLayer
       for(int i = 0; i < 3; i++)
       {
     	  int pointScreenX =  i*image.getWidth(null) +(int)(x - Camera.x / d);
-    	  int endWScreenX = endW + (int)(x - Camera.x / d);
          g.drawImage(image,pointScreenX, (int)(y - Camera.y / d), null);
          
          if(pointScreenX < -endW){
-        	// int offset = -endW - point screen
+        	 //int offset = -endW - point screen
         	 //drew it on top of the first
         	 //there is an offset that causes the flickering
         	 
