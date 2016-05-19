@@ -12,26 +12,18 @@ public class ImageLayer
 
    private float d = 1;
    private int endW;
-   String filename;
 
 
    public ImageLayer(String filename)
    {
 	  image = Toolkit.getDefaultToolkit().getImage(filename);
-	  this.filename = filename;
-	  endW =  this.getWidth();
-	  System.out.println(endW);
    }
 
    public ImageLayer(String filename, float distance)
    {
 	  image = Toolkit.getDefaultToolkit().getImage(filename);
-
-	  this.filename = filename;
       setDistance(distance);
-      //return -1 because it cannot get the width yet
-	  endW = this.getWidth();
-	  System.out.println(endW);
+
    }
 
    public void setX(float x)
@@ -72,10 +64,6 @@ public class ImageLayer
          g.drawImage(image,pointScreenX, (int)(y - Camera.y / d), null);
          
          if(pointScreenX < -endW){
-        	 //int offset = -endW - point screen
-        	 //drew it on top of the first
-        	 //there is an offset that causes the flickering
-        	 
         	 x += endW;
          }
          /*
@@ -87,8 +75,31 @@ public class ImageLayer
          	 x -= endW;
           }
           */
-         System.out.println(pointScreenX + " " + filename + " width  = " + image.getWidth(null));
          
       }
    }
+   /*
+   //not working
+   public void drawInfiniteLeft(Graphics g)
+   {
+
+	   this.endW =  this.getWidth();
+      for(int i = 0; i < 3; i++)
+      {
+    	  int pointScreenX =  i*image.getWidth(null) +(int)(x - Camera.x / d);
+         g.drawImage(image,pointScreenX, (int)(y - Camera.y / d), null);
+         
+         if(pointScreenX > -endW){
+        	 //int offset = -endW - point screen
+        	 //drew it on top of the first
+        	 //there is an offset that causes the flickering
+        	 
+        	 x -= endW;
+         }
+       
+         
+      }
+      
+   }
+   */
 }
