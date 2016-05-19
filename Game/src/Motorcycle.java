@@ -4,6 +4,7 @@ public class Motorcycle extends Character{
 	static String filename = "Images/Character/Motorcycle/motorcycle";
 	static String extension = ".png";
 	int speed = 10;
+	int turnSpeed = 10; //this speed is used for turning to make it smooth
 	int life = 100; 
 	public Motorcycle() {
 		super(filename, extension,700, 400, 1, 3,4);
@@ -11,9 +12,15 @@ public class Motorcycle extends Character{
 	}
 	public void pressA1(boolean p){
 		if(p){
-			speed = 20;
+			if(speed < 20){
+				speed++;
+			}
 		}
-		else speed = 10;
+		else {
+			if(speed > 10){
+				speed--;
+			}
+		}
 	}
 	public void moveRt(){
 		super.moveRt(speed);
