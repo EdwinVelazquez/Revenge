@@ -15,12 +15,20 @@ public class Motorcycle extends Character{
 			if(speed < 20){
 				speed++;
 			}
+			if(turnSpeed < 15){
+				turnSpeed++;
+			}
 		}
 		else {
 			if(speed > 10){
 				speed--;
 			}
+			if(turnSpeed > 10){
+				turnSpeed--;
+			}
+			
 		}
+		
 	}
 	public void moveRt(){
 		super.moveRt(speed);
