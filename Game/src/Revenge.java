@@ -28,32 +28,37 @@ public class Revenge extends JFrame implements Runnable {
 	//the following booleans are for which screen to show
 	boolean pause = false;
 	boolean start = true;
-	boolean select = false;
+	boolean credit = false;
 	boolean playerSelect = false;
+	
+	//screens
 	StartScreen startScreen;
 	CreditScreen creditScreen;
 	Background background;
+	GameBackground gameB;
+	
 	//this is used for full screen
 	Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	//int fullW = (int) screenSize.getWidth();
-	//int fullH = (int) screenSize.getHeight();
-	
-	//the images are set up for this dimension
-	int fullW = 1024;
-	int fullH = 640;
-	
-	//image layers
-	ImageLayer b1;
-	ImageLayer b2;
-	ImageLayer b3;
-	
+	final int fullW = (int) screenSize.getWidth();
+	final int fullH = (int) screenSize.getHeight();
 
+	//dimensions of the game
+	//int width = fullW, height = fullH;
+	int width = 1152;
+	int height = 720;
+		
+
+	//keyboard and other controls
 	KeyboardControl k = new KeyboardControl();
+	PS3Control ps3 = new PS3Control();
+	
+	//time and delays
 	int time;
 	int delay; //delay for button presses
 	
+	//player name used for csv game save
 	String player;
-
+	Motorcycle motorcycle;
 	
 	
 	public static void main(String[] args) {
@@ -67,34 +72,36 @@ public class Revenge extends JFrame implements Runnable {
 	public void draw() {
 		
 		Graphics g = getGraphics();
-		Graphics bbg = backBuffer.getGraphics(); 
-		bbg.setColor(Color.WHITE); 
-		bbg.fillRect(0, 0, fullW, fullH);
-		bbg.setColor(Color.black);
+		//buffer 
+		Graphics buffer = backBuffer.getGraphics(); 
+		buffer.setColor(Color.WHITE); 
+		buffer.fillRect(0, 0, width, height);
+		buffer.setColor(Color.black);
+		//start screen draw and credit screen draw
 		if(start){
-			background.draw(bbg, 0, 0);
-			if(select){ //this is the select screen (setting/credit/info screen)
-				creditScreen.draw(bbg); //display credits
+			background.draw(buffer, 0, 0);
+			if(credit){ //this is the select screen (setting/credit/info screen)
+				creditScreen.draw(buffer); //display credits
 					if(playerSelect){ //this should be handled somewhere else
 						player = JOptionPane.showInputDialog("Current Player: " + player);
 						if(player == null || player.equals("")){ //avoid empty box
 							player = "Player1";
 						}
 						playerSelect = false;
-						k.Start = false; //there is a bug here where it gets stuck in true (will fix later for now this is quick fix)
+						k.Start = false; //there is a bug here where it gets stuck in true without this (will fix later for now this is quick fix)
 					}
 			}
 			else{
-				bbg.drawString("Press not select", 20, 60);
-				startScreen.draw(bbg); 
+				startScreen.draw(buffer); 
 			}
 		}
+		//start of game screens draw
 		else{
-			b3.draw(bbg);
-			b2.draw(bbg);
-			b1.draw(bbg);
+			gameB.draw(buffer);
+			motorcycle.draw(buffer);
 		}
-		bbg.drawString("Time: " + time, 20, 40);
+		
+		buffer.drawString("Time: " + time, 20, 40);
 		g.drawImage(backBuffer, 0, 0, this);
 		
 		
@@ -107,25 +114,59 @@ public class Revenge extends JFrame implements Runnable {
 	public void update() {
 		time++;
 		delay++;
-		//change the screen 
-		if(select && k.pressStart() && delay > 30){
+		
+		//this is to switch player in credit screen
+		if(credit && k.pressStart() && delay > 30){
 			playerSelect = true;
 			delay = 0;
 		}
+		//start the game
 		else if(k.pressStart() && delay > 30){
 			start = false;
 			delay = 0;
 		}
-		//if it is the start screen and press select when the delay is greater than 30
+		//switch to credit screen 
 		if(start && k.pressSelect() && delay > 30){
-			select = !select;
+			credit = !credit;
 			delay = 0;
 		}
-		//if you are in the game controls
+		//if you are in the game this is where the controls go
 		if(start == false){
-			if(k.pressLeft()){
-				Camera.moveBy(-5, 0);
+			//change speed
+			Camera.moveBy(10, 0); //will change later this is the speed of the motorcycle
+			motorcycle.moveRt();
+			
+			motorcycle.pressA1(k.pressAct1()); //change the speed should be clean later (shouldnt be here)
+			if(k.pressAct1()){
+				if(motorcycle.x >= Camera.x + 700){
+					Camera.moveBy(10, 0);
+				}
 			}
+			else if(motorcycle.x <= Camera.x){ //move the motorcycle automatically
+				motorcycle.setSpeed(10);
+			}
+			else{
+				motorcycle.setSpeed(3);
+			}
+
+			
+			if(k.pressLeft()){
+				//disable for this game
+				//motorcycle.moveLt(10);
+				//Camera.moveBy(motorcycle.speed, 0);
+			}
+			if(k.pressUp()){
+				if(motorcycle.y >= 288){
+					motorcycle.moveUp(motorcycle.speed);
+				}
+
+			}
+			if(k.pressDown()) {
+				if(435 >= motorcycle.y){
+					motorcycle.moveDn(motorcycle.speed);
+				}
+			}
+			
 		}
 	
 	}
@@ -134,29 +175,37 @@ public class Revenge extends JFrame implements Runnable {
 	 * this method initializes everything
 	 */
 	public void init() {
+		//window stuff
 		setTitle("Driver's Revenge"); //title
-		setSize(fullW, fullH); 
+		setSize(width, height); 
 	    setFocusable(true);
 	    requestFocusInWindow();
-	    setResizable(true);
-	    addKeyListener(k);
-	    //buffering
-	    backBuffer = new BufferedImage(fullW, fullH, BufferedImage.TYPE_INT_RGB); 
-	    //initialize screens
-	    startScreen = new StartScreen(fullW,fullH);
-	    creditScreen = new CreditScreen(fullW,fullH);
-	    background = new Background(fullW,fullH);
+	    setResizable(false);
 	    setDefaultCloseOperation(EXIT_ON_CLOSE); 
 	    setVisible(true); 
+	    
+	    //key listener for keyboard
+	    addKeyListener(k);
+	    
+	    //buffering
+	    backBuffer = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB); 
+	    
+	    //initialize screens
+	    startScreen = new StartScreen(width,height);
+	    creditScreen = new CreditScreen(width,height);
+	    background = new Background(width,height);
+	    gameB = new GameBackground(width,height);
+	    Sound.sound1.play();
+
+	    //camera
 	    Camera.setLocation(200, 0);
+	    
 	    //time is a clock for keeping track of delays etc
 	    time = 0;
 	    delay = 0;
 	    player = "Player1"; //starts with default player 'Player1'
 	
-	    b1 = new ImageLayer("trees.gif");
-	    b2 = new ImageLayer("houses.gif", 2);
-	    b3 = new ImageLayer("mountains.gif", 8);
+	   motorcycle = new Motorcycle();
 	}
 
 	/**
@@ -166,7 +215,6 @@ public class Revenge extends JFrame implements Runnable {
 	public void run() {
 		
 		while (true) {
-			
 			update();
 			draw();
 			
@@ -174,6 +222,7 @@ public class Revenge extends JFrame implements Runnable {
 				Thread.sleep(16);
 			} catch (Exception e) {
 			}
+
 		}
 
 	}
