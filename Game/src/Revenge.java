@@ -150,6 +150,9 @@ public class Revenge extends JFrame implements Runnable {
 				if(motorcycle.speed>3){
 					motorcycle.speed--;
 				}
+				if(motorcycle.turnSpeed>3){
+					motorcycle.turnSpeed--;
+				}
 				motorcycle.setSpeed(motorcycle.speed);
 			}
 
@@ -162,13 +165,16 @@ public class Revenge extends JFrame implements Runnable {
 			if(k.pressUp()){
 				if(motorcycle.y >= 288){
 					
-					motorcycle.moveUp(motorcycle.speed);
+					motorcycle.moveUp(motorcycle.turnSpeed);
 				}
 
 			}
 			if(k.pressDown()) {
-				if(435 >= motorcycle.y){
-					motorcycle.moveDn(motorcycle.speed);
+				if(438 > motorcycle.y){
+					motorcycle.moveDn(motorcycle.turnSpeed);
+				}
+				else{
+					motorcycle.y = 438;
 				}
 			}
 			
